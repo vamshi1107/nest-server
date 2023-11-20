@@ -9,19 +9,27 @@ export class DttController {
 
   @Post('/book')
   async getIndex(@Body() appointment: Appointment) {
-    let status: boolean = false;
+    let status: number = 0;
     try {
       if (appointment?.emailID) {
         let id = Math.round(Date.now()).toString(36);
         let meetingLink = `https://dtt-meets.vercel.app/${id}`;
-        status = await this.mailService.sendConfirmation(
+        let mail = await this.mailService.sendConfirmation(
           appointment,
           meetingLink,
           id,
         );
+        if (mail?.status?.accepted?.length > 0) {
+          status = 100;
+        } else {
+          status = 200;
+        }
+      } else {
+        status = 300;
       }
     } catch (err) {
       console.log('error', err);
+      status = 400;
     }
     return { status };
   }
