@@ -1,15 +1,23 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Appointment } from 'src/entities/appointment.dto';
 import { MailService } from 'src/mail/mail.service';
+import { v4 } from 'uuid';
 
 @Controller('dtt')
 export class DttController {
   constructor(readonly mailService: MailService) {}
 
-  @Get('/')
-  async getIndex(@Query('to') to: string) {
+  @Post('/book')
+  async getIndex(@Body() appointment: Appointment) {
     let status: boolean = false;
-    if (to) {
-      status = await this.mailService.sendConfirmation(to);
+    if (appointment?.emailID) {
+      let id = Math.round(Date.now()).toString(36);
+      let meetingLink = `https://dtt-meets.vercel.app/${id}`;
+      status = await this.mailService.sendConfirmation(
+        appointment,
+        meetingLink,
+        id,
+      );
     }
     return status;
   }
