@@ -11,7 +11,8 @@ export class DttController {
   async getIndex(@Body() appointment: Appointment) {
     let status: number = 0;
     try {
-      if (appointment?.emailID) {
+      console.log('Appointment', appointment);
+      if (appointment?.emailID != undefined) {
         let id = Math.round(Date.now()).toString(36);
         let meetingLink = `https://dtt-meets.vercel.app/${id}`;
         let mail = await this.mailService.sendConfirmation(
@@ -19,7 +20,8 @@ export class DttController {
           meetingLink,
           id,
         );
-        if (mail?.status?.accepted?.length > 0) {
+        console.log('Mail response', mail);
+        if (mail?.accepted?.length > 0) {
           status = 100;
         } else {
           status = 200;
