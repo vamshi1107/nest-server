@@ -19,6 +19,6 @@ export class DttController {
         id,
       );
     }
-    return status;
+    return { statue: status };
   }
 }

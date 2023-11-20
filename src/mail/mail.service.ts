@@ -17,7 +17,6 @@ export class MailService {
         'vamshi.a4u@gmail.com',
         'ka1236@att.com',
         'anumulakarthikreddy1235@gmail.com',
-        'sa7742@att.com',
       ],
       from: 'No Reply (DTT - Appointments)',
       subject: 'Confirmation of Your Video Call Appointment',
