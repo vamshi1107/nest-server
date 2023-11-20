@@ -10,15 +10,19 @@ export class DttController {
   @Post('/book')
   async getIndex(@Body() appointment: Appointment) {
     let status: boolean = false;
-    if (appointment?.emailID) {
-      let id = Math.round(Date.now()).toString(36);
-      let meetingLink = `https://dtt-meets.vercel.app/${id}`;
-      status = await this.mailService.sendConfirmation(
-        appointment,
-        meetingLink,
-        id,
-      );
+    try {
+      if (appointment?.emailID) {
+        let id = Math.round(Date.now()).toString(36);
+        let meetingLink = `https://dtt-meets.vercel.app/${id}`;
+        status = await this.mailService.sendConfirmation(
+          appointment,
+          meetingLink,
+          id,
+        );
+      }
+    } catch (err) {
+      console.log('error', err);
     }
-    return { statue: status };
+    return { status };
   }
 }

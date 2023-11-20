@@ -10,8 +10,8 @@ export class MailService {
     appointment: Appointment,
     link: string,
     id: string,
-  ): Promise<boolean> {
-    await this.mailerService.sendMail({
+  ): Promise<any> {
+    return await this.mailerService.sendMail({
       to: [
         appointment?.emailID,
         'vamshi.a4u@gmail.com',
@@ -29,6 +29,5 @@ export class MailService {
         id: id ?? '',
       },
     });
-    return true;
   }
 }
