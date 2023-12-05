@@ -14,7 +14,7 @@ export class DttController {
       console.log('Appointment', appointment);
       if (appointment?.emailID != undefined) {
         let id = Math.round(Date.now()).toString(36);
-        let meetingLink = `https://dtt-meets.vercel.app/${id}`;
+        let meetingLink = `https://peer-js-meets.vercel.app/`;
         let mail = await this.mailService.sendConfirmation(
           appointment,
           meetingLink,
