@@ -16,7 +16,7 @@ export class MailService {
         appointment?.emailID,
         'vamshi.a4u@gmail.com',
         'ka1236@att.com',
-        'anumulakarthikreddy1235@gmail.com',
+        'anumulakarthikreddy12345@gmail.com',
       ],
       from: 'No Reply (DTT - Appointments)',
       subject: 'Confirmation of Your Video Call Appointment',
